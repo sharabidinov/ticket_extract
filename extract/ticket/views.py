@@ -28,7 +28,7 @@ class TicketInline:
             return redirect('ticket:list_tickets')
 
     def flight_formset_valid(self, formset):
-        flights = formset.save(commit=False)
+        flights = self.save_formset(formset, contact)  # formset.save(commit=False)
 
         for obj in formset.deleted_objects:
             obj.delete()

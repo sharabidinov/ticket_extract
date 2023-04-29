@@ -3,7 +3,7 @@
 
 {% block title %}Ticket{% endblock title %}
 
-{% block body %}
+{% block content %}
     <form enctype="multipart/form-data" class="container" method="post" id="ticket_form">
         {% csrf_token %}
         <div class="ticket">
@@ -29,7 +29,7 @@
         </div>
         {% with named_formsets.flights as formset %}
             {{ formset.management_form }}
-            <script type="text/html" id="flights-template">
+            <script type="text/html" id="tickets-template">
                 <tr id="flights-__prefix__" class="hide_all">
                     {% for fields in formset.empty_form.hidden_fields %}
                         {{ fields }}
@@ -83,7 +83,7 @@
                             {% endfor %}
                             {% if forms.instance.pk %}
                                 <td>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal"
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
                                             data-target="#exampleModal{{ forms.instance.pk }}">
                                         Delete
                                     </button>
@@ -137,13 +137,13 @@
         $(document).ready(function () {
             $('.add-flights').click(function (ev) {
                 ev.preventDefault();
-                let count = $("#item-flights").children().length;
-                let tmplMarkup = $('#flights-template').html();
-                let compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
-                $('#item-flights').append(compiledTmpl);
+                var count = $("#item-tickets").children().length;
+                var tmplMarkup = $('#tickets-template').html();
+                var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+                $('#item-tickets').append(compiledTmpl);
 
-                $('#id_flights-TOTAL_FORMS').attr('value', count + 1);
+                $('#id_tickets-TOTAL_FORMS').attr('value', count + 1);
             });
         });
     </script>
-{% endblock body %}
+{% endblock content %}

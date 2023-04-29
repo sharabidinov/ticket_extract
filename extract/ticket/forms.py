@@ -14,4 +14,5 @@ class FlightForm(forms.ModelForm):
         fields = '__all__'
 
 
-FlightFormSet = forms.inlineformset_factory(Ticket, Flight, form=FlightForm, extra=1, can_delete_extra=True)
+FlightFormSet = forms.inlineformset_factory(Ticket, Flight, form=FlightForm, extra=0, can_delete=True,
+                                            can_delete_extra=True)
